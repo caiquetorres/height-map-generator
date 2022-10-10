@@ -1,0 +1,21 @@
+{
+  "name": "height-map-generator",
+  "version": "1.0.0",
+  "description": "API for generating height maps based on seeds of several types",
+  "main": "main.js",
+  "author": "Caique Torres",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "npx babel src --out-dir dist",
+    "start": "babel-node src/main.js",
+    "start:dev": "nodemon"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.3",
+    "@babel/node": "^7.19.1",
+    "@babel/preset-env": "^7.19.4",
+    "nodemon": "^2.0.20"
+  }
+}
