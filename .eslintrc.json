@@ -1,4 +1,5 @@
 {
+  "parser": "@babel/eslint-parser",
   "root": true,
   "plugins": ["import-helpers"],
   "extends": ["prettier"],
