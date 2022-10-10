@@ -1,0 +1,22 @@
+{
+  "root": true,
+  "plugins": ["import-helpers"],
+  "extends": ["prettier"],
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "rules": {
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": ["/.exception/", "/.service/", "/.controller/", ["index"]],
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
+      }
+    ]
+  }
+}
