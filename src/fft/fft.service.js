@@ -26,7 +26,6 @@ export class FftService {
     this._fft.swapQuadrants(frequencies)
     this._fft.shift(frequencies)
 
-    console.log(contrast)
     image.bitmap.data = this._fromComplexArray(frequencies, contrast)
 
     return image
