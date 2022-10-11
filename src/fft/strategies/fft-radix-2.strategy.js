@@ -77,7 +77,7 @@ export class FftRadix2 {
      */
     function _invFftRadix2(start, offset, size, s) {
       if (size === 1) {
-        output[start] = signal[offset]
+        output[start] = frequencies[offset]
         return
       }
 
