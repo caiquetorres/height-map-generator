@@ -3,13 +3,16 @@
  */
 export class Complex {
   /**
-   * Property that defines the complex number module of magnitude, it is
-   * defined as the vector length.
+   * Property that defines the complex number module of magnitude, it is defined as the vector length.
    */
   get magnitude() {
     return Math.sqrt(this.real * this.real + this.imaginary * this.imaginary)
   }
 
+  /**
+   * @param {number} real defines the real part of the number.
+   * @param {number} imaginary defines the complex part of the number.
+   */
   constructor(real, imaginary) {
     this.real = real
     this.imaginary = imaginary
@@ -52,7 +55,7 @@ export class Complex {
    * @returns {Complex} a new complex number that represents the result of the multiplication between the current complex number and the one given through the `z` parameter.
    */
   times(z) {
-    if (typeof z === 'object') {
+    if (z instanceof Complex) {
       const realPart = this.real * z.real - this.imaginary * z.imaginary
       const imaginaryPart = this.real * z.imaginary + this.imaginary * z.real
       return new Complex(realPart, imaginaryPart)
