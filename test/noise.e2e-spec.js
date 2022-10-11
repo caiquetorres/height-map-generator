@@ -13,9 +13,9 @@ describe('Noise (e2e)', () => {
     app.use(appRouter)
   })
 
-  it('/POST /white-noise', async () => {
+  it('/POST /noises/white-noise', async () => {
     const { body } = await supertest(app)
-      .post('/white-noise')
+      .post('/noises/white-noise')
       .send({
         size: 128,
         seed: 'frequency domain',
