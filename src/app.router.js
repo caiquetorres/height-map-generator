@@ -1,3 +1,4 @@
+import fftRouter from './fft/fft.router'
 import noiseRouter from './noise/noise.router'
 
 import { AppService } from './app.service'
@@ -19,6 +20,7 @@ router.get('/ping', (_, res) => {
   res.send(service.ping())
 })
 
-router.use(noiseRouter)
+router.use('/noises', noiseRouter)
+router.use('/fft', fftRouter)
 
 export default router
