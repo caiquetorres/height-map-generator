@@ -30,6 +30,7 @@
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-angular": "^17.1.0",
     "@types/jest": "^29.1.2",
+    "@types/node": "^18.8.4",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import-helpers": "^1.2.1",
