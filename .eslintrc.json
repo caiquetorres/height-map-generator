@@ -12,7 +12,7 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": ["/.exception/", "/.service/", "/.controller/", ["index"]],
+        "groups": ["/.exception/", "/.router/", "/.service/", ["index"]],
         "alphabetize": {
           "order": "asc",
           "ignoreCase": true
