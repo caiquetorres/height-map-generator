@@ -1,10 +1,8 @@
 import appRouter from './app.router'
 
-import express from 'express'
+import { createApp } from './base'
 
-const app = express()
-
-app.use(express.json())
+const app = createApp()
 
 app.use(appRouter)
 
