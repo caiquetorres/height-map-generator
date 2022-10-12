@@ -10,13 +10,12 @@ export class NoiseService {
    * Method that, given a size and a seed (optional), generates a white noise.
    *
    * @param {number} size defines the generated image width and height.
-   * @param {number | string | undefined} seed defines a value that will be used to generate the white noise. Equal values always will generate equal noises. If the value is undefined then the white noise will be random.
+   * @param {number | string} [seed] defines a value that will be used to generate the white noise. Equal values always will generate equal noises. If the value is undefined then the white noise will be random.
    * @returns an image that contains the generated image.
    */
-  async generateWhiteNoiseImage(size, seed) {
+  generateWhiteNoiseImage(size, seed) {
     const whiteNoise = this._generateWhiteNoise(size, seed)
-    const image = await this._signalToImage(whiteNoise)
-    return image
+    return this._signalToImage(whiteNoise)
   }
 
   /**

@@ -25,7 +25,7 @@ describe('Noise (e2e)', () => {
     expect(body).toBeInstanceOf(Buffer)
 
     const expectedImage = await Jimp.read(
-      path.resolve(__dirname, '../assets/white-noise.png'),
+      path.resolve(__dirname, '../assets/white-noise.jpg'),
     ).then((res) => res.bitmap.data)
 
     const receivedImage = await Jimp.read(body).then((res) => res.bitmap.data)
