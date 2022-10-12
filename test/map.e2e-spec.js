@@ -13,10 +13,10 @@ describe('HeightMap (e2e)', () => {
     app.use(appRouter)
   })
 
-  describe('/POST /height-map', () => {
+  describe('/POST /maps/height-map', () => {
     it('should create a height map based on a seed', async () => {
       const { body } = await supertest(app)
-        .post('/height-map')
+        .post('/maps/height-map')
         .send({
           size: 128,
           seed: 'fourier transform',
