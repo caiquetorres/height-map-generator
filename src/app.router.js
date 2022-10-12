@@ -1,4 +1,5 @@
 import fftRouter from './fft/fft.router'
+import heightMapRouter from './height-map/height-map.router'
 import noiseRouter from './noise/noise.router'
 
 import { AppService } from './app.service'
@@ -22,5 +23,6 @@ router.get('/ping', (_, res) => {
 
 router.use('/noises', noiseRouter)
 router.use('/fft', fftRouter)
+router.use('/height-map', heightMapRouter)
 
 export default router
