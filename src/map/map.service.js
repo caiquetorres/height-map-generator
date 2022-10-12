@@ -2,12 +2,14 @@ import { NoiseService } from '../noise/noise.service'
 
 import { Nyquist2D } from '../common/classes/nyquist'
 import { Fft } from '../fft/fft'
+import { Color } from './classes/color'
+import { Level } from './classes/level'
 import Jimp from 'jimp'
 
 /**
  * Service responsible for handling any logic related with height maps generation.
  */
-export class HeightMapService {
+export class MapService {
   constructor() {
     /**
      * @private
@@ -61,6 +63,47 @@ export class HeightMapService {
     )
 
     return image
+  }
+
+  /**
+   * Method that generates a new color map given it size, seed and roughness.
+   *
+   * @param {number} size defines the height map dimension.
+   * @param {number | string} [seed] defines the base value to generate the height map. Equal values always generate equal height maps.
+   * @param {number} [roughness] defines the detail level of the height map.
+   * @returns {Promise<Jimp>} a signal that represents the generated color map.
+   */
+  async generateColorMap(size, seed, roughness) {
+    const heightMap = await this.generateHeighMap(size, seed, roughness)
+
+    const colorMap = heightMap.clone()
+    const pixelData = colorMap.bitmap.data
+
+    const levels = [
+      new Level(0, 80, new Color('#3228c8')), // deep sea
+      new Level(80, 90, new Color('#0f6ec8')), // flat sea
+      new Level(90, 110, new Color('#FFFB9D')), // sand
+      new Level(140, 175, new Color('#288A2E')), // dark grass
+      new Level(110, 140, new Color('#174D1A')), // light grass
+      new Level(175, 200, new Color('#8D8D8D')), // light rock
+      new Level(200, 220, new Color('#525252')), // dark rock
+      new Level(220, 255, new Color('#ffffff')), // snow
+    ]
+
+    for (let i = 0; i < pixelData.length; i += 4) {
+      for (const level of levels) {
+        if (pixelData[i] < level.min || pixelData[i] >= level.max) {
+          continue
+        }
+
+        pixelData[i] = level.color.r
+        pixelData[i + 1] = level.color.g
+        pixelData[i + 2] = level.color.b
+        pixelData[i + 3] = 255
+      }
+    }
+
+    return colorMap
   }
 
   /**
