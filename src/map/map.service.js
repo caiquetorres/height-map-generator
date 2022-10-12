@@ -34,7 +34,7 @@ export class MapService {
     roughness ??= 2.4
 
     const whiteNoise = await this._noise.generateWhiteNoiseImage(size, seed)
-    const pixelData = whiteNoise.bitmap.data
+    const pixelData = Array.from(whiteNoise.bitmap.data)
     const frequencies = this._fft.transform(pixelData)
     const width = Math.sqrt(frequencies.length)
 
