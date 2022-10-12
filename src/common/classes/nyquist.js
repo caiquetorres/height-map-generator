@@ -1,3 +1,6 @@
+/**
+ * Class that represents a one dimensional `Nyquist Serie`.
+ */
 export class Nyquist1D extends Array {
   constructor(length) {
     super()
@@ -18,6 +21,9 @@ export class Nyquist1D extends Array {
   }
 }
 
+/**
+ * Class that represents a second dimensional `Nyquist Serie`.
+ */
 export class Nyquist2D extends Array {
   constructor(length) {
     super(length)
