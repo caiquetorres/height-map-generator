@@ -4,10 +4,20 @@ import { Nyquist2D } from '../common/classes/nyquist'
 import { Fft } from '../fft/fft'
 import Jimp from 'jimp'
 
+/**
+ * Service responsible for handling any logic related with height maps generation.
+ */
 export class HeightMapService {
   constructor() {
-    this.fft = new Fft()
-    this.noise = new NoiseService()
+    /**
+     * @private
+     */
+    this._fft = new Fft()
+
+    /**
+     * @private
+     */
+    this._noise = new NoiseService()
   }
 
   /**
@@ -21,9 +31,9 @@ export class HeightMapService {
   async generateHeighMap(size, seed, roughness) {
     roughness ??= 2.4
 
-    const whiteNoise = await this.noise.generateWhiteNoiseImage(size, seed)
+    const whiteNoise = await this._noise.generateWhiteNoiseImage(size, seed)
     const pixelData = whiteNoise.bitmap.data
-    const frequencies = this.fft.transform(pixelData)
+    const frequencies = this._fft.transform(pixelData)
     const width = Math.sqrt(frequencies.length)
 
     const nyquist2d = new Nyquist2D(width)
@@ -43,7 +53,7 @@ export class HeightMapService {
       }
     }
 
-    const resultSignal = this.fft.inverseTransform(frequencies)
+    const resultSignal = this._fft.inverseTransform(frequencies)
     const normalizedSignal = this._normalize(resultSignal)
 
     const image = await this._signalToImage(normalizedSignal).then((res) =>
@@ -63,6 +73,8 @@ export class HeightMapService {
    * @returns an object that represents an image.
    */
   async _signalToImage(signal) {
+    // REVIEW: Move this method to some class
+
     const size = Math.sqrt(signal.length / 4)
     const image = await Jimp.create(size, size, 0)
 
@@ -73,6 +85,8 @@ export class HeightMapService {
 
   /**
    * Method that normalizes an signal based on it maximum and minimum values.
+   *
+   * @private
    *
    * @param {number[]} signal defines an array that represents the signal
    * @returns {number[]} an array that represents the normalized signal.
