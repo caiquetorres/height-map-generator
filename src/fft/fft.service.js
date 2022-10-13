@@ -1,3 +1,5 @@
+import { HttpException } from '../common/errors/http.exception'
+
 import { Complex } from '../common/classes/complex'
 import { Fft } from './fft'
 import Jimp from 'jimp'
@@ -14,12 +16,22 @@ export class FftService {
   }
 
   /**
-   * @param {Buffer} buffer
-   * @param {number | undefined} contrast
+   * Method that applies the `Fast Fourier Transform`.
+   *
+   * @param {number | Buffer | ArrayBuffer} signal defines the image that will be converted.
+   * @param {number} contrast defines a value that increases or decreases the result image contrast.
    */
-  async transform(buffer, contrast) {
+  async transform(signal, contrast) {
+    const buffer = Buffer.from(signal)
+
     const image = await Jimp.read(buffer)
     const pixelData = Array.from(image.bitmap.data)
+
+    const { width, height } = image.bitmap
+
+    if (!this._isPowerOfTwo(width) || !this._isPowerOfTwo(height)) {
+      throw new HttpException(400, 'The size must be a power of two')
+    }
 
     const frequencies = this._fft.transform(pixelData)
 
