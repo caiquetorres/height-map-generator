@@ -1,3 +1,5 @@
+import { HttpException } from '../common/errors/http.exception'
+
 import { NoiseService } from '../noise/noise.service'
 
 import { Nyquist2D } from '../common/classes/nyquist'
@@ -32,6 +34,10 @@ export class MapService {
    */
   async generateHeighMap(size, seed, roughness) {
     roughness ??= 2.4
+
+    if (!this._isPowerOfTwo(size)) {
+      throw new HttpException(400, 'The size must be a power of two')
+    }
 
     const whiteNoise = await this._noise.generateWhiteNoiseImage(size, seed)
     const pixelData = Array.from(whiteNoise.bitmap.data)
@@ -104,6 +110,18 @@ export class MapService {
     }
 
     return colorMap
+  }
+
+  /**
+   * Method that says if the given number is power of two or not.
+   *
+   * @private
+   *
+   * @param {number} n defines the number that will be validated.
+   * @returns {boolean} true if the number is power of two, otherwise false.
+   */
+  _isPowerOfTwo(n) {
+    return !!n && !(n & (n - 1))
   }
 
   /**

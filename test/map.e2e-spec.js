@@ -1,5 +1,3 @@
-import appRouter from '../src/app.router'
-
 import { createApp } from '../src/base'
 import Jimp from 'jimp'
 import path from 'path'
@@ -10,7 +8,6 @@ describe('HeightMap (e2e)', () => {
 
   beforeEach(() => {
     app = createApp()
-    app.use(appRouter)
   })
 
   describe('/POST /maps/height-map', () => {

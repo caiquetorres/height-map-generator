@@ -1,5 +1,3 @@
-import appRouter from '../src/app.router'
-
 import { createApp } from '../src/base'
 import Jimp from 'jimp/'
 import path from 'path'
@@ -10,26 +8,27 @@ describe('Noise (e2e)', () => {
 
   beforeEach(() => {
     app = createApp()
-    app.use(appRouter)
   })
 
-  it('/POST /noises/white-noise', async () => {
-    const { body } = await supertest(app)
-      .post('/noises/white-noise')
-      .send({
-        size: 128,
-        seed: 'frequency domain',
-      })
-      .expect(200)
+  describe('/POST /noises/white-noise', () => {
+    it('should generate a white noise of resolution 128x128 pixels', async () => {
+      const { body } = await supertest(app)
+        .post('/noises/white-noise')
+        .send({
+          size: 128,
+          seed: 'frequency domain',
+        })
+        .expect(200)
 
-    expect(body).toBeInstanceOf(Buffer)
+      expect(body).toBeInstanceOf(Buffer)
 
-    const expectedImage = await Jimp.read(
-      path.resolve(__dirname, '../assets/white-noise.jpg'),
-    ).then((res) => res.bitmap.data)
+      const expectedImage = await Jimp.read(
+        path.resolve(__dirname, '../assets/white-noise.jpg'),
+      ).then((res) => res.bitmap.data)
 
-    const receivedImage = await Jimp.read(body).then((res) => res.bitmap.data)
+      const receivedImage = await Jimp.read(body).then((res) => res.bitmap.data)
 
-    expect(receivedImage).toEqual(expectedImage)
+      expect(receivedImage).toEqual(expectedImage)
+    })
   })
 })
