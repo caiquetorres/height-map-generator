@@ -30,7 +30,7 @@ export class NoiseController {
       throw new HttpException(400, 'The size must be a number')
     }
 
-    if (seed) {
+    if (seed !== undefined) {
       if (typeof seed !== 'string' && typeof seed !== 'number') {
         throw new HttpException(400, 'The seed must be a string or a number')
       }
