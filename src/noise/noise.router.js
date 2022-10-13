@@ -1,5 +1,6 @@
 import { NoiseService } from './noise.service'
 
+import { NoiseController } from './noise.controller'
 import { Router } from 'express'
 
 /**
@@ -7,20 +8,10 @@ import { Router } from 'express'
  */
 const router = Router()
 
-/**
- * Property that defines the noise service, responsible for handling all the business logic related with noises.
- */
-const service = new NoiseService()
+const controller = new NoiseController()
 
-router.post('/white-noise', async (req, res) => {
-  const { size, seed } = req.body
-
-  const noiseImage = await service.generateWhiteNoiseImage(size, seed)
-
-  const mimetype = noiseImage.getMIME()
-  const buffer = await noiseImage.getBufferAsync(mimetype)
-
-  res.set('Content-Type', mimetype).send(buffer)
+router.post('/white-noise', (req, res, next) => {
+  controller.generateWhiteNoiseImage(req, res).catch((error) => next(error))
 })
 
 export default router
