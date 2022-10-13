@@ -28,11 +28,11 @@ export class FftController {
     const file = req.file
 
     if (!file) {
-      throw new HttpException(404, 'The file must be defined')
+      throw new HttpException(400, 'The file must be defined')
     }
 
     if (!file.buffer) {
-      throw new HttpException(404, 'The file be a file')
+      throw new HttpException(400, 'The file be a file')
     }
 
     if (!this._allowedMimetypes.has(file.mimetype)) {
