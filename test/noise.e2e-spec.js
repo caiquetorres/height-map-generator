@@ -30,5 +30,42 @@ describe('Noise (e2e)', () => {
 
       expect(receivedImage).toEqual(expectedImage)
     })
+
+    it('should get 400 (Bad Request) when trying to generate a new white noise without sending the size', async () => {
+      const { body } = await supertest(app)
+        .post('/noises/white-noise')
+        .send({
+          // expected size
+        })
+        .expect(400)
+
+      expect(body).toHaveProperty('statusCode')
+      expect(body).toHaveProperty('message')
+    })
+
+    it('should get 400 (Bad Request) when trying to generate a new white noise sending an invalid size', async () => {
+      const { body } = await supertest(app)
+        .post('/noises/white-noise')
+        .send({
+          size: 'invalid size', // expected number
+        })
+        .expect(400)
+
+      expect(body).toHaveProperty('statusCode')
+      expect(body).toHaveProperty('message')
+    })
+
+    it('should get 400 (Bad Request) when trying to generate a new white noise sending an seed size', async () => {
+      const { body } = await supertest(app)
+        .post('/noises/white-noise')
+        .send({
+          size: 64,
+          seed: {}, // expected number or string
+        })
+        .expect(400)
+
+      expect(body).toHaveProperty('statusCode')
+      expect(body).toHaveProperty('message')
+    })
   })
 })
