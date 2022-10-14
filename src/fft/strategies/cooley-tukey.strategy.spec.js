@@ -1,14 +1,14 @@
 import { Complex } from '../../common/classes/complex'
-import { FftRadix2 } from './fft-radix-2.strategy'
+import { CooleyTukeyStrategy } from './cooley-tukey.strategy'
 
-describe('FftRadix2', () => {
+describe('CooleyTukeyStrategy', () => {
   /**
-   * @type {FftRadix2}
+   * @type {CooleyTukeyStrategy}
    */
   let radix2
 
   beforeEach(() => {
-    radix2 = new FftRadix2()
+    radix2 = new CooleyTukeyStrategy()
   })
 
   it('should convert a signal to an array of complex numbers', () => {

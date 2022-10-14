@@ -1,5 +1,5 @@
 import { Complex } from '../common/classes/complex'
-import { FftRadix2 } from './strategies/fft-radix-2.strategy'
+import { CooleyTukeyStrategy } from './strategies/cooley-tukey.strategy'
 
 /**
  * Class that contains all logic related with the `Fast Fourier Transform`.
@@ -10,9 +10,9 @@ export class Fft {
      * Property that defines an object that contains the strategy that will be used to apply the `Fourier Transform` in any signal passed to this class methods.
      *
      * @private
-     * @type {FftRadix2}
+     * @type {CooleyTukeyStrategy}
      */
-    this.strategy = strategy ?? new FftRadix2()
+    this.strategy = strategy ?? new CooleyTukeyStrategy()
   }
 
   /**

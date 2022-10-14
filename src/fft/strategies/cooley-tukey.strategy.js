@@ -3,7 +3,7 @@ import { Complex } from '../../common/classes/complex'
 /**
  * Class that contains all the logic related with the `Fast Fourier Transform` using the `fft radix 2` algorithm.
  */
-export class FftRadix2 {
+export class CooleyTukeyStrategy {
   /**
    * Method that applies the `Fast Fourier Transform`.
    *
