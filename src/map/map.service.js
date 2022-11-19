@@ -89,11 +89,11 @@ export class MapService {
       new Level(0, 80, new Color('#3228c8')), // deep sea
       new Level(80, 90, new Color('#0f6ec8')), // flat sea
       new Level(90, 110, new Color('#FFFB9D')), // sand
-      new Level(140, 175, new Color('#288A2E')), // dark grass
-      new Level(110, 140, new Color('#174D1A')), // light grass
-      new Level(175, 200, new Color('#8D8D8D')), // light rock
-      new Level(200, 220, new Color('#525252')), // dark rock
-      new Level(220, 255, new Color('#ffffff')), // snow
+      new Level(110, 140, new Color('#174D1A')), // dark grass
+      new Level(140, 190, new Color('#288A2E')), // light grass
+      new Level(190, 220, new Color('#8D8D8D')), // light rock
+      new Level(220, 235, new Color('#5D5D5D')), // dark rock
+      new Level(235, 255, new Color('#FBFAF3')), // snow
     ]
 
     for (let i = 0; i < pixelData.length; i += 4) {
