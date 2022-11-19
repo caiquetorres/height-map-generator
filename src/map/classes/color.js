@@ -24,7 +24,7 @@ export class Color {
    * Method that converts a hex value to an object that contains the properties `r`, `g` and `b`.
    *
    * @param {string} hex defines the hexadecimal color value.
-   * @returns {Rgb} an object that represents the hex in rgba.
+   * @returns {Rgb | null} an object that represents the hex in rgba.
    */
   _hexToRgb(hex) {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
