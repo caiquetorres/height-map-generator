@@ -1,5 +1,10 @@
 import { createApp } from './base'
+import { Env } from './env/env'
 
-const app = createApp()
+function bootstrap() {
+  Env.config()
 
-app.listen(3000)
+  const app = createApp()
+  app.listen(+Env.get('PORT'))
+}
+bootstrap()
